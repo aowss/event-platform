@@ -84,5 +84,5 @@ If not, please use the full path to a Java 9 JRE, e.g. `/Library/Java/JavaVirtua
 
 ## Requirements
 
-1. JSR356 API
+1. [JSR 356 : Java API for WebSocket](https://jcp.org/en/jsr/detail?id=356)
 2. Java 9
