@@ -18,19 +18,19 @@ The base URL for all events is : `ws://localhost:8025/websockets/events/`
 
 Here are all the airport topics :
 
-. `airports:UK:London:LHR`
-. `airports:UK:London:GTW`
-. `airports:UK:London:LTN`
-. `airports:France:Peris:CDG`
-. `airports:UK:London`
+. `airports:UK:London:LHR`  
+. `airports:UK:London:GTW`  
+. `airports:UK:London:LTN`  
+. `airports:France:Peris:CDG`  
+. `airports:UK:London`  
 . `airports`
 
-Here are all the airport topics :
+Here are all the flight topics :
 
-. `flights:BA:123:1:2016-11-15`
-. `flights:BA:123:2:2016-11-15`
-. `flights:BA:123:1:2016-11-16`
-. `flights:BA:1:1:2016-11-15`
+. `flights:BA:123:1:2016-11-15`  
+. `flights:BA:123:2:2016-11-15`  
+. `flights:BA:123:1:2016-11-16`  
+. `flights:BA:1:1:2016-11-15`  
 . `flights`
 
 ##### Java Client
@@ -43,7 +43,7 @@ The command line parameter is the topic name
 
 ##### `0.0.1-SNAPSHOT`
 
-The message content is : `Departure message for airports:UK:London:LHR`.
+The message content is : `Departure message for airports:UK:London:LHR`.  
 The first word is one of `Departure`, `Arrival` or `Alert`.
 
 ##### `0.0.2-SNAPSHOT`
@@ -79,7 +79,7 @@ Added a location event with the following format :
 
 ## Notes
 
-Your `JAVA_HOME` environment variable should point to a Java 9 Runtime Environment.
+Your `JAVA_HOME` environment variable should point to a Java 9 Runtime Environment.  
 If not, please use the full path to a Java 9 JRE, e.g. `/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home/bin/java` on Mac.
 
 ## Requirements
