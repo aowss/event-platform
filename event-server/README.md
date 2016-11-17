@@ -41,14 +41,8 @@ The command line parameter is the topic name
 
 #### Messages
 
-##### `0.0.1-SNAPSHOT`
+##### Simple Event
 
-The message content is : `Departure message for airports:UK:London:LHR`.  
-The first word is one of `Departure`, `Arrival` or `Alert`.
-
-##### `0.0.2-SNAPSHOT`
-
-The message content is : 
 ````
 {
        	"id": "0",
@@ -59,9 +53,8 @@ The message content is :
 }
 ````
 
-##### `0.0.4-SNAPSHOT`
+##### Location Event
 
-Added a location event with the following format :
 ````
 {
        	"id": "0",
