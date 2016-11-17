@@ -1,10 +1,10 @@
 # Event Server
 
-A simple websocket event server.
+A simple mock websocket event server.
 
 ## Running
 
-### Server
+### Standalone Server
 
 `java -classpath event-server-`version`.jar event.server.WebSocketServer`
 
