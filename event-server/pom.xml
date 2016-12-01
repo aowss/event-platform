@@ -4,7 +4,7 @@
 
 	<groupId>com.aowss</groupId>
 	<artifactId>event-server</artifactId>
-	<version>0.0.4-SNAPSHOT</version>
+	<version>0.0.5-SNAPSHOT</version>
 
 	<name>Event Server</name>
 
@@ -31,12 +31,12 @@
     </dependencies>
 
 	<build>
-		<!-- <finalName>event-server</finalName> -->
+		<finalName>event-server</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
+				<version>3.6.0</version>
 				<configuration>
 					<compilerVersion>1.9</compilerVersion>
 					<source>1.9</source>
@@ -92,7 +92,11 @@
 								<configuration>
 									<transformers>
 										<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-											<mainClass>event.server.WebSocketServer</mainClass>
+											<manifestEntries>
+												<Main-Class>event.server.WebSocketServer</Main-Class>
+												<X-Compile-Source-JDK>1.9</X-Compile-Source-JDK>
+												<X-Compile-Target-JDK>1.9</X-Compile-Target-JDK>
+											</manifestEntries>
 										</transformer>
 									</transformers>
 								</configuration>

@@ -32,8 +32,8 @@ public class EventClientEndpoint {
 
     public static void main(String[] args) throws Exception {
 
-        if (args.length != 1) {
-            System.out.println("You must provide the topic");
+        if (args.length != 2) {
+            System.out.println("You must provide the ip address and the topic. The port is fixed to 8025.");
             System.exit(-1);
         }
 
@@ -41,7 +41,7 @@ public class EventClientEndpoint {
 
         ClientManager client = ClientManager.createClient();
         try {
-            client.connectToServer(EventClientEndpoint.class, new URI("ws://localhost:8025/websockets/events/" + args[0]));
+            client.connectToServer(EventClientEndpoint.class, new URI("ws://"  + args[0] + ":8025/websockets/events/" + args[1]));
             latch.await();
         } catch (DeploymentException | URISyntaxException | InterruptedException e) {
             throw new RuntimeException(e);

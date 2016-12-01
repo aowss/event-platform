@@ -20,20 +20,19 @@ import java.util.stream.Collectors;
  * Even though, the WebSocket runtime scans the WAR file to find all implementations of <code>ServerApplicationConfig</code> and registers the endpoint returned from <code>getEndpointConfigs</code> and <code>getAnnotatedEndpointClasses</code>, this registration process is not dynamic.
  * The <code>{topic}</code> path parameter can't contain '/' ! This might be a bug in the reference implementation.
  */
-@ServerEndpoint(value = "/events/{topic}")
+@ServerEndpoint(value = "/events/{topic}", configurator = Configuration.class)
 public class EventServerEndpoint  implements Flow.Subscriber<SimpleEvent> {
 
     //  The key is the topic path, the value is the set of sessions linked to that topic
     private static Map<String, Set<Session>> sessions = new TreeMap<>();
 
-    private Logger logger = Logger.getLogger(this.getClass().getName());
+    //  The list of feeds this endpoint subscribes to
+    private Set<Flow.Subscription> subscriptions = new HashSet<>();
 
-//    private Set<Flow.Publisher<SimpleEvent>> publishers = new HashSet<>();
+    private Logger logger = Logger.getLogger(this.getClass().getName());
 
     //  The constructor is not called until the endpoint is accessed so no events are generated until someone connects !
     public EventServerEndpoint() {
-//        publisher = new FakeSimpleEventPublisher();
-//        publisher.subscribe(this);
         new FakeSimpleEventPublisher().subscribe(this);
         new FakeSimpleLocationEventPublisher().subscribe(this);
     }
@@ -74,17 +73,16 @@ public class EventServerEndpoint  implements Flow.Subscriber<SimpleEvent> {
         logger.info("[user leaving][ " + topic + " ] session(s) : " + sessions.get(topic).stream().map(Session::getId).collect(Collectors.joining(", ")));
     }
 
-    private Flow.Subscription subscription;
-
     @Override
     public void onSubscribe(Flow.Subscription subscription) {
-        this.subscription = subscription;
+        logger.info("[subscription] : " + subscription);
         subscription.request(3);
+        subscriptions.add(subscription);
     }
 
     @Override
     public void onNext(SimpleEvent item) {
-        logger.info("[new event] : " + item);
+        logger.info("[new event] : \n" + item);
         //  Poor-man's trie
         sessions.entrySet().stream().
                 filter(entry -> item.getContext().contains(entry.getKey())).
@@ -103,7 +101,7 @@ public class EventServerEndpoint  implements Flow.Subscriber<SimpleEvent> {
             logger.info("None is interested in " + item.getContext() + " messages !");
         }
         */
-        subscription.request(3);
+        subscriptions.stream().forEach(subscription -> subscription.request(3));
     }
 
     @Override
